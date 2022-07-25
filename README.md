@@ -1,19 +1,14 @@
-# My personal modern NeoVim config
-
-<p align="center">
-<img src="https://i.imgur.com/x3X4LWu.png" alt="Startup screen" width="70%"/><br>
-<img src="https://i.imgur.com/Uy7542a.png" alt="Startup screen" width="49%"/>
-<img src="https://i.imgur.com/VmKLt06.png" alt="Startup screen" width="49%"/><br>
-<img src="https://i.imgur.com/bOxca0J.png" alt="Startup screen" width="49%"/>
-<img src="https://i.imgur.com/JIZE92B.png" alt="Startup screen" width="49%"/><br>
-</p>
+# My personal modern NeoVim config (based on [leslie255 config](https://github.com/leslie255/nvim-config))
 
 ## Setup
 0. Use the latest version of NVIM
 1. This setup uses packer.nvim for the package manager, so first install packer.nvim by following the [official instructions](https://github.com/wbthomason/packer.nvim#quickstart)
-2. Clone this repo into `~/.config/nvim`:
+2. Clone this repo into `~/.config/nvim`: or `%localappdata%\local\nvim` on windows
 ```
-git clone https://github.com/p-z-l/nvim-config.git ~/.config/nvim
+#on linux
+git clone https://github.com/yoyozbi/config ~/.config/nvim
+#or windows (via powershell)
+git clone https://github.com/yoyozbi/config $env:LOCALAPPDATA\nvim
 ```
 3. When you first enter `nvim`, you will see a bunch of mess because the plugins aren't installed yet, so run `:PackerInstall` to install the plugins<br>
 > Note that there is a chance that the download would timeout and `packer.nvim` would report install failed, in this case run `:PackerInstall` again
@@ -27,9 +22,9 @@ Alternatively, in `lua/configs/treesitter.lua`, line `6`, you can have a list of
 ## Usage
 > TODO: for now read `lua/core/keymaps.lua` for reference
 
-Note that the config uses `;` as the leader key by default, you can of course change it in `lua/core/keymaps.lua`, line `1`<br>
-Most keymaps in this setup are what I call declarative keymaps, for example, everything related to terminal emulator starts with `;t`, so `;tt` means "terminal toggle", and `;tn` means "terminal new"<br>
-Btw, tryout `;lb` in files with LSP support, it's really fancy!
+Note that the config uses `,` as the leader key by default, you can of course change it in `lua/core/keymaps.lua`, line `1`<br>
+Most keymaps in this setup are what I call declarative keymaps, for example, everything related to terminal emulator starts with `,t`, so `,tt` means "terminal toggle", and `,tn` means "terminal new"<br>
+Btw, tryout `,lb` in files with LSP support, it's really fancy!
 
 ## Contributing
 **Having troubles**<br>
@@ -42,5 +37,3 @@ For now, you don't, this is *my personal config*, although do leave suggestions 
 
 ## TODOs
 - Better git integration
-- Clean up Lua config code
-- Optimize startup time
