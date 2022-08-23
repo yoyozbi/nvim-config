@@ -71,6 +71,12 @@ function M.config()
             on_attach = on_attach
         }
     end
+    --ensure servers are installed by using mason-lspconfig
+    require("mason").setup()
+    require("mason-lspconfig").setup({
+      ensure_installed = servers,
+      automatic_installation = true
+    })
     -- eslint on save
     vim.api.nvim_command("autocmd BufWritePre <buffer> <cmd>EslintFixAll<CR>")
 

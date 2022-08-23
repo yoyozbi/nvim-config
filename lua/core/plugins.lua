@@ -38,6 +38,9 @@ return require('packer').startup(function()
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
     use 'L3MON4D3/LuaSnip'
+    --lsp helper
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
 --    use {'neoclide/coc.nvim', run = "yarn install --frozen-lockfile"}
     use 'nvim-treesitter/nvim-treesitter'
     use 'onsails/lspkind-nvim'
@@ -70,6 +73,8 @@ return require('packer').startup(function()
 
     -- auto-pair
     use 'windwp/nvim-autopairs'
+    -- notifications
+    use 'rcarriga/nvim-notify'
 
 end)
 
