@@ -2,7 +2,7 @@ local M = {}
 function M.config()
  require'bufferline'.setup { 
    numbers = "buffer_id",
-   diagnostic = "coc"
+   diagnostic = "nvim_lsp"
  }
 end
 return M
