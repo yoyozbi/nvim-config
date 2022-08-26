@@ -1,4 +1,4 @@
-# My personal modern NeoVim config (based on [leslie255 config](https://github.com/leslie255/nvim-config))
+# My personal modern NeoVim config (based on [craftzdog config](https://github.com/craftzdog/dotfiles-public))
 
 ## Setup
 0. Use the latest version of NVIM
