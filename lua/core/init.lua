@@ -42,12 +42,12 @@ vim.g.neovide_refresh_rate=165
 --clipboard
 vim.cmd("set clipboard=unnamedplus")
 -- set shell to powershell on windows
-if package.config:sub(1,1) == '\\' then 
-  vim.cmd("set shell=powershell")
-  vim.cmd("set shellcmdflag=-command")
-  vim.cmd("set shellquote=\"")
-  vim.cmd("set shellxquote=")
-end
+--if package.config:sub(1,1) == '\\' then 
+--  vim.cmd("set shell=powershell")
+--  vim.cmd("set shellcmdflag=-command")
+--  vim.cmd("set shellquote=\"")
+--  vim.cmd("set shellxquote=")
+--end
 -- Load plugin configs
 -- plugins without extra configs are configured directly here
 require("impatient")
@@ -61,3 +61,4 @@ require("configs.outlinetree").config()
 require("configs.startscreen").config()
 require("configs.bufferline").config()
 require("configs.autopair").config()
+--require("configs.notify").config()
