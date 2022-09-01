@@ -1,36 +1,61 @@
-local keymap = vim.keymap
+function Map(mode, lhs, rhs, opts)
+  local options = { noremap = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
 
-keymap.set('n', 'x', '"_x')
+
+Map('n', 'x', '"_x')
 
 -- Increment/decrement
-keymap.set('n', '+', '<C-a>')
-keymap.set('n', '-', '<C-x>')
+Map('n', '+', '<C-a>')
+Map('n', '-', '<C-x>')
 
 -- Delete a word backwards
-keymap.set('n', 'dw', 'vb"_d')
+Map('n', 'dw', 'vb"_d')
 
 -- Select all
-keymap.set('n', '<C-a>', 'gg<S-v>G')
+Map('n', '<C-a>', 'gg<S-v>G')
 
 -- Save with root permission (not working for now)
 --vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
 
+-- move lines
+Map('n', '<A-j>', ':m .+1<CR>==', { silent = true })
+Map('n', '<A-k>', ':m .-2<CR>==', { silent = true })
+Map('i', '<A-j>', '<Esc>:m .+1<CR>==', { silent = true })
+Map('i', '<A-k>', '<Esc>:m .-2<CR>==', { silent = true })
+Map('v', '<A-j>', ':m \'>+1<CR>gv=gv', { silent = true })
+Map('v', '<A-k>', ':m \'<-2<CR>gv=gv', { silent = true })
+
 -- New tab
-keymap.set('n', 'te', ':tabedit')
+Map('n', 'te', ':tabedit', { silent = true })
+-- split current window into new tab
+Map('n', 'to', ':tab split <CR>', { silent = true })
+-- Move windows
+Map('n', 'tn', ':tabm +1', { silent = true })
+Map('n', 'tp', ':tabm -1', { silent = true})
 -- Split window
-keymap.set('n', 'ss', ':split<Return><C-w>w')
-keymap.set('n', 'sv', ':vsplit<Return><C-w>w')
+Map('n', 'ss', ':split<Return><C-w>w', { silent = true })
+Map('n', 'sv', ':vsplit<Return><C-w>w', { silent = true })
 -- Move window
-keymap.set('n', '<Space>', '<C-w>w')
-keymap.set('', 'sh', '<C-w>h')
-keymap.set('', 'sk', '<C-w>k')
-keymap.set('', 'sj', '<C-w>j')
-keymap.set('', 'sl', '<C-w>l')
+Map('n', '<Space>', '<C-w>w')
+Map('', 'sh', '<C-w>h')
+Map('', 'sk', '<C-w>k')
+Map('', 'sj', '<C-w>j')
+Map('', 'sl', '<C-w>l')
 
 -- Resize window
-keymap.set('n', '<C-w><left>', '<C-w><')
-keymap.set('n', '<C-w><right>', '<C-w>>')
-keymap.set('n', '<C-w><up>', '<C-w>+')
-keymap.set('n', '<C-w><down>', '<C-w>-')
+Map('n', '<C-w>+', '<C-w><')
+Map('n', '<C-w>-', '<C-w>>')
+Map('n', '+', '<C-w>+')
+Map('n', '-', '<C-w>-')
+
 -- terminal escape
-keymap.set('t', '<Esc>', '<C-\\><C-n>')
+Map('t', '<Esc>', '<C-\\><C-n>')
+
+-- telescope
+Map('n', 'tt', ':Telescope grep_string <CR>', { silent = true })
+Map('n', 'tf', ":Telescope find_files <CR>", { silent = true })
