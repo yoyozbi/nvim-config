@@ -59,3 +59,5 @@ Map('t', '<Esc>', '<C-\\><C-n>')
 -- telescope
 Map('n', 'tt', ':Telescope grep_string <CR>', { silent = true })
 Map('n', 'tf', ":Telescope find_files <CR>", { silent = true })
+-- run current c file 
+Map('', '<F5>', ':!gcc "%" -o "%<.exe" && "%<.exe" <CR>')
