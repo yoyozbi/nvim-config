@@ -74,6 +74,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["bufferline.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\bufferline.nvim",
+    url = "https://github.com/akinsho/bufferline.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-buffer",
@@ -89,6 +94,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\colorbuddy.nvim",
     url = "https://github.com/tjdevries/colorbuddy.nvim"
   },
+  ["context.vim"] = {
+    loaded = true,
+    path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\context.vim",
+    url = "https://github.com/wellle/context.vim"
+  },
   ["git.nvim"] = {
     loaded = true,
     path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\git.nvim",
@@ -98,6 +108,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  harpoon = {
+    loaded = true,
+    path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\harpoon",
+    url = "https://github.com/ThePrimeagen/harpoon"
   },
   ["lspkind-nvim"] = {
     loaded = true,
@@ -113,11 +128,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
-  },
-  ["markdown-preview.nvim"] = {
-    loaded = true,
-    path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\markdown-preview.nvim",
-    url = "https://github.com/iamcco/markdown-preview.nvim"
   },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
@@ -143,11 +153,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
-  },
-  ["nvim-bufferline.lua"] = {
-    loaded = true,
-    path = "C:\\Users\\yohan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-bufferline.lua",
-    url = "https://github.com/akinsho/nvim-bufferline.lua"
   },
   ["nvim-cmp"] = {
     loaded = true,
