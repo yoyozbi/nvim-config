@@ -1,26 +1,14 @@
 function Map(mode, lhs, rhs, opts)
-  local options = { noremap = true }
-  if opts then
-    options = vim.tbl_extend("force", options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    local options = {noremap = true}
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 
-Map('n', 'x', '"_x')
-
--- Increment/decrement
-Map('n', '+', '<C-a>')
-Map('n', '-', '<C-x>')
-
--- Delete a word backwards
-Map('n', 'dw', 'vb"_d')
-
--- Select all
-Map('n', '<C-a>', 'gg<S-v>G')
-
--- Save with root permission (not working for now)
---vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
+--Select all
+Map('n', '<C-a>','gg<S-v>G')
 
 -- move lines
 Map('n', '<A-j>', ':m .+1<CR>==', { silent = true })
@@ -55,7 +43,6 @@ Map('n', '-', '<C-w>-')
 
 -- terminal escape
 Map('t', '<Esc>', '<C-\\><C-n>')
-
 -- telescope
 Map('n', 'tt', ':Telescope grep_string <CR>', { silent = true })
 Map('n', 'tf', ":Telescope find_files <CR>", { silent = true })
