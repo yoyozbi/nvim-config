@@ -8,5 +8,5 @@ mason.setup({
 })
 
 lspconfig.setup {
-  ensure_installed = { "ccls", "html","tsserver", "rust_analyzer", "pyright", "vuels", "eslint", "gopls", "cmake", "dockerls", "emmet_ls","prismals", "sumneko_lua", "tailwindcss" },
+  ensure_installed = { "sumneko_lua", "tailwindcss" },
 }
