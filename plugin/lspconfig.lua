@@ -108,7 +108,7 @@ end
 nvim_lsp.sumneko_lua.setup {
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
-    enable_format_on_save(client, bufnr)
+--    enable_format_on_save(client, bufnr) -- not working for now
   end,
   capabilities = capabilities,
   settings = {
@@ -139,7 +139,93 @@ nvim_lsp.tailwindcss.setup({
   end,
   capabilities = capabilities
 })
-local servers = {"rust_analyzer", "gopls", "astro", "pyright" }
+
+nvim_lsp.rust_analyzer.setup({
+  on_attach = on_attach,
+  settings = {
+    ["rust-analyzer"] = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true,
+      },
+    }
+  }
+})
+nvim_lsp.intelephense.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    stubs = {
+      "bcmath",
+      "bz2",
+      "Core",
+      "curl",
+      "date",
+      "dom",
+      "fileinfo",
+      "filter",
+      "gd",
+      "gettext",
+      "hash",
+      "iconv",
+      "imap",
+      "intl",
+      "json",
+      "libxml",
+      "mbstring",
+      "mcrypt",
+      "mysql",
+      "mysqli",
+      "password",
+      "pcntl",
+      "pcre",
+      "PDO",
+      "pdo_mysql",
+      "Phar",
+      "readline",
+      "regex",
+      "session",
+      "SimpleXML",
+      "sockets",
+      "sodium",
+      "standard",
+      "superglobals",
+      "tokenizer",
+      "xml",
+      "xdebug",
+      "xmlreader",
+      "xmlwriter",
+      "yaml",
+      "zip",
+      "zlib",
+      "wordpress-stubs",
+      "woocommerce-stubs",
+      "acf-pro-stubs",
+      "wordpress-globals",
+      "wp-cli-stubs",
+      "genesis-stubs",
+      "polylang-stubs"
+    },
+    environment = {
+      includePaths = {'C:\\Users\\yohan\\AppData\\Roaming\\Composer\\vendor\\php-stubs\\'},
+    },
+    files = {
+      maxSize = 5000000;
+    }
+  }
+})
+
+local servers = { "gopls", "astro", "pyright", "vuels" }
 for _, lsp in pairs(servers) do
     nvim_lsp[lsp].setup  {
         on_attach = on_attach,
@@ -192,5 +278,6 @@ mason.setup({
 })
 
 lspconfig.setup {
-  ensure_installed = TableConcat(servers,{"sumneko_lua","tailwindcss","tsserver"}),
+  ensure_installed = TableConcat(servers,{"sumneko_lua","tailwindcss","tsserver", "rust_analyzer"}),
+  automatic_installation = true
 }

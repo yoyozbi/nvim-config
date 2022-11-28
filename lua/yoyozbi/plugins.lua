@@ -16,10 +16,13 @@ packer.startup(function(use)
     use 'onsails/lspkind.nvim'
     use 'princejoogie/tailwind-highlight.nvim'
     use 'glepnir/lspsaga.nvim' -- LSP UIS
+    use 'L3MON4D3/LuaSnip'
 
     --Prettier
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'MunifTanjim/prettier.nvim'
+
+    use 'windwp/nvim-autopairs'
 
     use {
         "williamboman/mason.nvim",
@@ -41,7 +44,7 @@ packer.startup(function(use)
         }
     }
 
-    use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'} 
+    use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
 
     use {
         'wellle/context.vim',
@@ -50,10 +53,14 @@ packer.startup(function(use)
         end
     }
    use 'gelguy/wilder.nvim' --autocompletion for vim commands
-
+   
    use {
         'nvim-telescope/telescope.nvim',
         requires = {"nvim-lua/plenary.nvim"}
    }
 
+   use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+     })
 end)

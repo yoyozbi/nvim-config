@@ -33,7 +33,7 @@ Map("n", "tp", "<Cmd>BufferLineMovePrev<CR>", {silent = true})
 
 -- Split window
 Map('n', 'ss', ':split<Return><C-w>w', { silent = true })
-Map('n', 'sv', ':vsplit<Return><C-w>w', { silent = true })
+Map('n', 'sv', ':vsplit<Return><C-w>w', { silent = true})
 
 -- Move window
 Map('n', '<Space>', '<C-w>w')
@@ -53,5 +53,9 @@ Map('t', '<Esc>', '<C-\\><C-n>')
 -- telescope
 Map('n', 'tt', '<Cmd>Telescope grep_string<CR>', { silent = true })
 Map('n', 'tf', "<Cmd>Telescope find_files<CR>", { silent = true })
+-- markdown preview
+Map('n', 'mo', '<Cmd>MarkdownPreview<CR>', { silent = true })
+Map('n','mq', '<Cmd>MarkdownPreviewStop<CR>', { silent =true })
+Map('n', 'mt', '<Cmd>MarkdownPreviewToggle<CR>', { silent = true })
 -- run current c file 
 Map('', '<F5>', ':!gcc "%" -o "%<.exe" && "%<.exe" <CR>')

@@ -1,6 +1,6 @@
 local status, wilder = pcall(require, "wilder")
 if(not status) then return end
-
+if (vim.g.vscode) then return end
 wilder.setup({modes= {":", "/", '?'}})
 wilder.set_option('renderer', wilder.popupmenu_renderer({
   highlighter = wilder.basic_highlighter(),
