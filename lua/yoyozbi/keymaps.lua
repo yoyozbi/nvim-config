@@ -11,12 +11,12 @@ end
 Map('n', '<C-a>','gg<S-v>G')
 
 --Lspsaga
-Map('n', '<C-j>', '<Cmd>Lspsaga diagnostic_jump_next<CR>', opts)
-Map('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', opts)
-Map('n', 'gd', '<Cmd>Lspsaga lsp_finder<CR>', opts)
-Map('i', '<C-k>', '<Cmd>Lspsaga signature_help<CR>', opts)
-Map('n', 'gp', '<Cmd>Lspsaga preview_definition<CR>', opts)
-Map('n', 'gr', '<Cmd>Lspsaga rename<CR>', opts)
+--Map('n', '<C-j>', '<Cmd>Lspsaga diagnostic_jump_next<CR>', opts)
+--Map('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', opts)
+--Map('n', 'gd', '<Cmd>Lspsaga lsp_finder<CR>', opts)
+--Map('i', '<C-k>', '<Cmd>Lspsaga signature_help<CR>', opts)
+--Map('n', 'gp', '<Cmd>Lspsaga preview_definition<CR>', opts)
+--Map('n', 'gr', '<Cmd>Lspsaga rename<CR>', opts)
 
 -- move lines
 Map('n', '<A-j>', ':m .+1<CR>==', { silent = true })

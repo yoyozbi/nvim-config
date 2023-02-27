@@ -1,4 +1,4 @@
-# My personnal NeoVim config
+# My personal NeoVim config
 
 ## Setup
 

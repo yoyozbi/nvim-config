@@ -105,7 +105,7 @@ else
 end
 
 
-nvim_lsp.sumneko_lua.setup {
+nvim_lsp.lua_ls.setup {
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
 --    enable_format_on_save(client, bufnr) -- not working for now
@@ -278,6 +278,6 @@ mason.setup({
 })
 
 lspconfig.setup {
-  ensure_installed = TableConcat(servers,{"sumneko_lua","tailwindcss","tsserver", "rust_analyzer"}),
+  ensure_installed = TableConcat(servers,{"lua_ls","tailwindcss","tsserver", "rust_analyzer"}),
   automatic_installation = true
 }

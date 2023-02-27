@@ -1,8 +1,5 @@
 local status, neotree = pcall(require, "neo-tree")
 if(not status) then return end
-local status2, bufferline = pcall(require, "bufferline")
-if(not status2) then return end
-require("bufferline").setup {}
 
 
 -- Unless you are still migrating, remove the deprecated commands from v1.x

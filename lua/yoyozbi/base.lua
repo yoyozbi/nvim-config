@@ -7,6 +7,7 @@ opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
 
 vim.wo.number = true -- show window line numbers
+vim.g.leader = ',';
 opt.relativenumber = true
 opt.title = true
 opt.autoindent = true
@@ -40,7 +41,7 @@ opt.wildoptions = 'pum'
 opt.pumblend = 5
 opt.background = 'dark'
 opt.guifont = "FiraCode Nerd Font Mono"
-vim.cmd(":colorscheme gruvbox");
+
 
 -- Undercurl
 -- vim.cmd([[let &t_Cs = "\e[4:3m"]])
