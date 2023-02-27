@@ -200,6 +200,7 @@ local plugins = {
   'L3MON4D3/LuaSnip',
   {
     "folke/which-key.nvim",
+    lazy = false,
     config = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
@@ -213,9 +214,31 @@ local plugins = {
 
   --Prettier
   'jose-elias-alvarez/null-ls.nvim',
-  'MunifTanjim/prettier.nvim',
+  {
+    'MunifTanjim/prettier.nvim',
+    config = function()
+      require('prettier').setup({
+  bin = 'prettierd',
+  filetypes = {
+    "css",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "scss",
+    "less"
+  }
+})
+    end
+},
 
-  'windwp/nvim-autopairs',
+  {
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup({})
+    end
+  },
 
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",

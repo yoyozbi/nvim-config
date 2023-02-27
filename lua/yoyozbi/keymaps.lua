@@ -1,3 +1,4 @@
+--local wk = require('which-key')
 function Map(mode, lhs, rhs, opts)
     local options = {noremap = true}
     if opts then
