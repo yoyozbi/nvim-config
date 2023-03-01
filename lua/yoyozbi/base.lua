@@ -2,12 +2,11 @@
 
 vim.scriptencoding = 'utf-8'
 
-local opt=vim.opt 
+local opt=vim.opt
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
 
 vim.wo.number = true -- show window line numbers
-vim.g.leader = ',';
 opt.relativenumber = true
 opt.title = true
 opt.autoindent = true
@@ -32,7 +31,7 @@ opt.wrap = true
 opt.backspace = { 'start', 'eol', 'indent' }
 opt.path:append { '**' } -- Finding files - Search down into subfolders
 opt.wildignore:append { '*/node_modules/*' }
-opt.mouse='a' -- Allow the use of mouse
+--opt.mouse='a' -- Allow the use of mouse
 -- Color
 opt.cursorline = true
 opt.termguicolors = true
@@ -42,6 +41,13 @@ opt.pumblend = 5
 opt.background = 'dark'
 opt.guifont = "FiraCode Nerd Font Mono"
 
+--neovide
+if vim.g.neovide then
+  vim.g.neovide_remember_window_size = true
+  vim.g.neovide_cursor_antialiasing = true
+  vim.g.neovide_cursor_animate_in_insert_mode = true
+  vim.g.neovide_cursor_animate_command_line = true
+end
 
 -- Undercurl
 -- vim.cmd([[let &t_Cs = "\e[4:3m"]])

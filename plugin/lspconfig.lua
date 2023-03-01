@@ -1,6 +1,5 @@
 local status, nvim_lsp = pcall(require, "lspconfig")
 if (not status) then return end
-
 local protocol = require('vim.lsp.protocol')
 
 local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
@@ -113,7 +112,7 @@ nvim_lsp.lua_ls.setup {
   capabilities = capabilities,
   settings = {
     Lua = {
-      diagnostics = {
+         diagnostics = {
         -- Get the language server to recognize the `vim` global
         globals = { 'vim' },
       },
@@ -121,7 +120,7 @@ nvim_lsp.lua_ls.setup {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file("", true),
-        checkThirdParty = false
+        check
       },
     },
   },
@@ -225,7 +224,7 @@ nvim_lsp.intelephense.setup({
   }
 })
 
-local servers = { "gopls", "astro", "pyright", "vuels" }
+local servers = { "gopls", "astro", "pyright", "vuels", 'clangd' }
 for _, lsp in pairs(servers) do
     nvim_lsp[lsp].setup  {
         on_attach = on_attach,
@@ -274,10 +273,9 @@ local status2, lspconfig = pcall(require, "mason-lspconfig")
 if (not status2) then return end
 
 mason.setup({
-
 })
 
 lspconfig.setup {
-  ensure_installed = TableConcat(servers,{"lua_ls","tailwindcss","tsserver", "rust_analyzer"}),
+  ensure_installed = TableConcat(servers,{"lua_ls","tailwindcss","tsserver", "rust_analyzer", "intelephense", "clangd","gopls", "pyright","astro"}),
   automatic_installation = true
 }

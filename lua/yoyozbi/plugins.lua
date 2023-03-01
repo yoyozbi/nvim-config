@@ -11,9 +11,191 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
--- lazy config
 
-local config = {
+local plugins = {
+
+  'neovim/nvim-lspconfig',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/nvim-cmp',
+  'onsails/lspkind.nvim',
+  {
+    'folke/lsp-colors.nvim',
+    config = function()
+      require('lsp-colors').setup({
+        Error = "#db4b4b",
+        Warning = "#e0af68",
+        Information = "#0db9d7",
+        Hint = "#10B981"
+      })
+    end
+  },
+  {
+    'princejoogie/tailwind-highlight.nvim',
+    lazy = false
+  },
+  {
+    'glepnir/lspsaga.nvim',
+    config = function()
+      require("lspsaga").setup({})
+    end,
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" },
+      --Please make sure you install markdown and markdown_inline parser
+      { "nvim-treesitter/nvim-treesitter" }
+    },
+    keys = {
+      { '<C-j>', '<Cmd>Lspsaga diagnostic_jump_next<CR>', desc = 'Jump to next diagnostic' },
+      { 'K',     '<Cmd>Lspsaga hover_doc<CR>',            desc = 'Hover docs' },
+      { 'gd',    '<Cmd>Lspsaga lsp_finder<CR>',           desc = 'Lsp finder' },
+      { '<C-k>', '<Cmd>Lspsaga signature_help<CR>',       mode = 'i',                    desc = 'signature help' },
+      { 'gp',    '<Cmd>Lspsaga preview_definition<CR>',   desc = 'show definition preview' },
+      { 'gr',    '<Cmd>Lspsaga rename<CR>',               desc = 'rename variable' }
+    }
+  }, -- LSP UIS
+  'L3MON4D3/LuaSnip',
+  {
+    "folke/which-key.nvim",
+    lazy = false,
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup({})
+    end,
+  },
+
+  --Prettier
+  'jose-elias-alvarez/null-ls.nvim',
+  {
+    'MunifTanjim/prettier.nvim',
+    config = function()
+      require('prettier').setup({
+          bin = 'prettierd',
+          filetypes = {
+          "css",
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "json",
+          "scss",
+          "less"
+        }
+    })
+    end
+},
+
+  {
+    'windwp/nvim-autopairs',
+    lazy=false,
+    config = function()
+      require('nvim-autopairs').setup({})
+    end
+  },
+
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+
+  --theme
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    config = function()
+      vim.cmd [[colorscheme tokyonight]]
+    end
+  },
+
+  'nvim-lualine/lualine.nvim', -- status line
+
+  -- file explorer
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    keys = {
+      { '<leader>n', '<Cmd>Neotree toggle<CR>', desc = 'toggle neo tree' },
+    },
+    dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons' }
+
+  },
+  --tabs
+  {
+    'akinsho/bufferline.nvim',
+    lazy=false,
+    config = function()
+      require('bufferline').setup({
+      })
+    end,
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
+
+  {
+    'wellle/context.vim',
+    config = function()
+      vim.g.context_enabled = 1
+    end
+  },
+  {
+    'gelguy/wilder.nvim', --autocompletion for vim commands
+    config = function()
+      if (vim.g.vscode) then return end
+      local wilder = require('wilder')
+      wilder.setup({ modes = { ":", "/", '?' } })
+      wilder.set_option('renderer', wilder.popupmenu_renderer({
+        highlighter = wilder.basic_highlighter(),
+        left = { ' ', wilder.popupmenu_devicons() },
+        right = { ' ', wilder.popupmenu_scrollbar() }
+      }))
+    end,
+  },
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    lazy=false
+  },
+  {
+    'numToStr/FTerm.nvim',
+    config = function()
+      require('FTerm').setup({
+        ft = 'FTerm',
+        cmd = 'powershell',
+        border = 'single',
+        auto_close = true,
+        hl = 'Normal',
+        blend = 0,
+        dimensions = {
+          height = 0.8,
+          width = 0.8,
+          x = 0.5,
+          y = 0.5,
+        },
+        clear_env = false,
+        env = nil,
+        on_exit = nil,
+        on_stdout = nil,
+        on_stderr = nil,
+      })
+    end,
+    keys = {
+        {'<leader>ft', '<CMD>lua require("FTerm").toggle()<CR>', desc='Open floating terminal'},
+        {'<Esc>', '<C-\\><C-n>', mode='t', desc='Exit terminal mode'}
+
+    }
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    lazy = false,
+    config = function()
+      vim.g.mkdp_auto_start = 1
+      vim.fn["mkdp#util#install"]()
+      vim.g.mkdp_filetypes= {"markdown"}
+      --vim.api.nvim_create_autocmd({"BufEnter"}, { pattern = "*.md", command = ':MarkdownPreview' })
+      --vim.api.nvim_create_autocmd({"BufDelete"}, {pattern = "*.md", command = ':MarkdownPreviewToggle'})
+    end,
+    ft = {"markdown"}
+  }
+}
+
+require("lazy").setup(plugins, {
   root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
   defaults = {
     lazy = true, -- should plugins be lazy-loaded?
@@ -86,14 +268,14 @@ local config = {
       -- To disable one of the defaults, set it to false
 
       -- open lazygit log
-      ["<localleader>l"] = function(plugin)
+      ["<leader>l"] = function(plugin)
         require("lazy.util").float_term({ "lazygit", "log" }, {
           cwd = plugin.dir,
         })
       end,
 
       -- open a terminal for the plugin dir
-      ["<localleader>t"] = function(plugin)
+      ["<leader>t"] = function(plugin)
         require("lazy.util").float_term(nil, {
           cwd = plugin.dir,
         })
@@ -153,160 +335,4 @@ local config = {
     skip_if_doc_exists = true,
   },
   state = vim.fn.stdpath("state") .. "/lazy/state.json", -- state info for checker and other things
-}
-
----- plugins
-local plugins = {
-
-  'neovim/nvim-lspconfig',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/nvim-cmp',
-  'onsails/lspkind.nvim',
-  {
-    'folke/lsp-colors.nvim',
-    config = function()
-      require('lsp-colors').setup({
-        Error = "#db4b4b",
-        Warning = "#e0af68",
-        Information = "#0db9d7",
-        Hint = "#10B981"
-      })
-    end
-  },
-  {
-    'princejoogie/tailwind-highlight.nvim',
-    lazy = false
-  },
-  {
-    'glepnir/lspsaga.nvim',
-    config = function()
-      require("lspsaga").setup({})
-    end,
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons" },
-      --Please make sure you install markdown and markdown_inline parser
-      { "nvim-treesitter/nvim-treesitter" }
-    },
-    keys = {
-      { '<C-j>', '<Cmd>Lspsaga diagnostic_jump_next<CR>', desc = 'Jump to next diagnostic' },
-      { 'K',     '<Cmd>Lspsaga hover_doc<CR>',            desc = 'Hover docs' },
-      { 'gd',    '<Cmd>Lspsaga lsp_finder<CR>',           desc = 'Lsp finder' },
-      { '<C-k>', '<Cmd>Lspsaga signature_help<CR>',       mode = 'i',                    desc = 'signature help' },
-      { 'gp',    '<Cmd>Lspsaga preview_definition<CR>',   desc = 'show definition preview' },
-      { 'gr',    '<Cmd>Lspsaga rename<CR>',               desc = 'rename variable' }
-    }
-  }, -- LSP UIS
-  'L3MON4D3/LuaSnip',
-  {
-    "folke/which-key.nvim",
-    lazy = false,
-    config = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-      require("which-key").setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      })
-    end,
-  },
-
-  --Prettier
-  'jose-elias-alvarez/null-ls.nvim',
-  {
-    'MunifTanjim/prettier.nvim',
-    config = function()
-      require('prettier').setup({
-  bin = 'prettierd',
-  filetypes = {
-    "css",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "scss",
-    "less"
-  }
 })
-    end
-},
-
-  {
-    'windwp/nvim-autopairs',
-    config = function()
-      require('nvim-autopairs').setup({})
-    end
-  },
-
-  "williamboman/mason.nvim",
-  "williamboman/mason-lspconfig.nvim",
-
-  --theme
-  {
-    'folke/tokyonight.nvim',
-    lazy = false,
-    config = function()
-      vim.cmd [[colorscheme tokyonight]]
-    end
-  },
-
-  'nvim-lualine/lualine.nvim', -- status line
-
-  -- file explorer
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    keys = {
-      { 'nt', '<Cmd>Neotree toggle<CR>', desc = 'toggle' },
-    },
-    dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons' }
-
-  },
-  --tabs
-  {
-    'akinsho/bufferline.nvim',
-    lazy=false,
-    config = function()
-      require('bufferline').setup({
-      })
-    end,
-    dependencies = { 'nvim-tree/nvim-web-devicons' }
-  },
-
-  {
-    'wellle/context.vim',
-    config = function()
-      vim.g.context_enabled = 1
-    end
-  },
-  {
-    'gelguy/wilder.nvim', --autocompletion for vim commands
-    config = function()
-      if (vim.g.vscode) then return end
-      local wilder = require('wilder')
-      wilder.setup({ modes = { ":", "/", '?' } })
-      wilder.set_option('renderer', wilder.popupmenu_renderer({
-        highlighter = wilder.basic_highlighter(),
-        left = { ' ', wilder.popupmenu_devicons() },
-        right = { ' ', wilder.popupmenu_scrollbar() }
-      }))
-    end,
-  },
-  {
-    'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    lazy=false
-  },
-  {
-    "iamcco/markdown-preview.nvim",
-    lazy = false,
-    config = function()
-      vim.fn["mkdp#util#install"]()
-      vim.api.nvim_create_autocmd("FileType", { pattern = "markdown", command = 'MarkdownPreview' })
-    end
-  }
-}
-
-require("lazy").setup(plugins, config)
