@@ -63,3 +63,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 opt.formatoptions:append { 'r' }
 
 opt.clipboard:append { 'unnamedplus' }
+-- global function to check for windows (Has "win32")
+Has = function(x)
+    return vim.fn.has(x) == 1
+end

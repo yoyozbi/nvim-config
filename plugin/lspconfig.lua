@@ -84,10 +84,8 @@ nvim_lsp.flow.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
-local has = function(x)
-    return vim.fn.has(x) == 1
-end
-if (has "win32") then
+
+if (Has "win32") then
     nvim_lsp.tsserver.setup {
         on_attach = on_attach,
         filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
@@ -107,7 +105,7 @@ end
 nvim_lsp.lua_ls.setup {
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
---    enable_format_on_save(client, bufnr) -- not working for now
+    enable_format_on_save(client, bufnr) -- not working for now
   end,
   capabilities = capabilities,
   settings = {
@@ -120,7 +118,6 @@ nvim_lsp.lua_ls.setup {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file("", true),
-        check
       },
     },
   },
@@ -216,7 +213,6 @@ nvim_lsp.intelephense.setup({
       "polylang-stubs"
     },
     environment = {
-      includePaths = {'C:\\Users\\yohan\\AppData\\Roaming\\Composer\\vendor\\php-stubs\\'},
     },
     files = {
       maxSize = 5000000;
@@ -224,7 +220,7 @@ nvim_lsp.intelephense.setup({
   }
 })
 
-local servers = { "gopls", "astro", "pyright", "vuels", 'clangd' }
+local servers = { "gopls", "astro", "pyright", "vuels", 'clangd', "svelte" }
 for _, lsp in pairs(servers) do
     nvim_lsp[lsp].setup  {
         on_attach = on_attach,
@@ -276,6 +272,6 @@ mason.setup({
 })
 
 lspconfig.setup {
-  ensure_installed = TableConcat(servers,{"lua_ls","tailwindcss","tsserver", "rust_analyzer", "intelephense", "clangd","gopls", "pyright","astro"}),
+  ensure_installed = TableConcat(servers,{"lua_ls","tailwindcss","tsserver", "rust_analyzer", "intelephense"}),
   automatic_installation = true
 }

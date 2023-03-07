@@ -44,7 +44,6 @@ Map('n', '<leader>mo', '<Cmd>MarkdownPreview<CR>', { silent = true })
 Map('n','<leader>mq', '<Cmd>MarkdownPreviewStop<CR>', { silent =true })
 Map('n', '<leader>mt', '<Cmd>MarkdownPreviewToggle<CR>', { silent = true })
 -- run current c or c++ file 
---
 
 
 vim.api.nvim_command([[
@@ -53,9 +52,8 @@ vim.api.nvim_command([[
   augroup END
 ]])
 vim.api.nvim_command([[
-  augroup CompileAndRunCPlusPlus
+  augroup CompileAndRunC
     autocmd! BufReadPost,BufWritePost *.c nnoremap <buffer> <F5> :w<Bar>!gcc "%" -o "%<.exe" && "%<.exe" <CR>
   augroup END
 ]])
---Map('', '<F5>', ':!gcc "%" -o "%<.exe" && "%<.exe" <CR>')
 
