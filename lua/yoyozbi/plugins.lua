@@ -48,7 +48,7 @@ local plugins = {
       { '<C-j>', '<Cmd>Lspsaga diagnostic_jump_next<CR>', desc = 'Jump to next diagnostic' },
       { 'K',     '<Cmd>Lspsaga hover_doc<CR>',            desc = 'Hover docs' },
       { 'gd',    '<Cmd>Lspsaga lsp_finder<CR>',           desc = 'Lsp finder' },
-      { '<C-k>', '<Cmd>Lspsaga signature_help<CR>',       mode = 'i',                    desc = 'signature help' },
+      { '<C-k>', '<Cmd>Lspsaga signature_help<CR>',       mode = 'i',                      desc = 'signature help' },
       { 'gp',    '<Cmd>Lspsaga preview_definition<CR>',   desc = 'show definition preview' },
       { 'gr',    '<Cmd>Lspsaga rename<CR>',               desc = 'rename variable' }
     }
@@ -70,8 +70,8 @@ local plugins = {
     'MunifTanjim/prettier.nvim',
     config = function()
       require('prettier').setup({
-          bin = 'prettierd',
-          filetypes = {
+        bin = 'prettierd',
+        filetypes = {
           "css",
           "javascript",
           "javascriptreact",
@@ -81,13 +81,13 @@ local plugins = {
           "scss",
           "less"
         }
-    })
+      })
     end
-},
+  },
 
   {
     'windwp/nvim-autopairs',
-    lazy=false,
+    lazy = false,
     config = function()
       require('nvim-autopairs').setup({})
     end
@@ -115,19 +115,26 @@ local plugins = {
       { '<leader>n', '<Cmd>Neotree toggle<CR>', desc = 'toggle neo tree' },
     },
     dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons' }
-
   },
   --tabs
   {
     'akinsho/bufferline.nvim',
-    lazy=false,
+    lazy = false,
     config = function()
       require('bufferline').setup({
       })
     end,
     dependencies = { 'nvim-tree/nvim-web-devicons' }
   },
-
+  {
+    'kazhala/close-buffers.nvim',
+    config = function()
+      require 'close_buffers'.setup({})
+    end,
+    keys = {
+      { '<leader>c', '<Cmd>lua require("close_buffers").delete({type= "this"})<CR>' }
+    }
+  },
   {
     'wellle/context.vim',
     config = function()
@@ -150,7 +157,7 @@ local plugins = {
   {
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    lazy=false
+    lazy = false
   },
   {
     'numToStr/FTerm.nvim',
@@ -176,8 +183,14 @@ local plugins = {
       })
     end,
     keys = {
-        {'<leader>ft', '<CMD>lua require("FTerm").toggle()<CR>', desc='Open floating terminal'},
-        {'<Esc>', '<C-\\><C-n>', mode='t', desc='Exit terminal mode'}
+      { '<leader>ft', '<CMD>lua require("FTerm").toggle()<CR>', desc = 'Open floating terminal' },
+      {
+        '<Esc>',
+        '<C-\\><C-n>',
+        mode = 't',
+        desc =
+        'Exit terminal mode'
+      }
 
     }
   },
@@ -187,18 +200,18 @@ local plugins = {
     config = function()
       vim.g.mkdp_auto_start = 1
       vim.fn["mkdp#util#install"]()
-      vim.g.mkdp_filetypes= {"markdown"}
-      --vim.api.nvim_create_autocmd({"BufEnter"}, { pattern = "*.md", command = ':MarkdownPreview' })
+      vim.g.mkdp_filetypes = { "markdown" }
+      vim.api.nvim_create_autocmd({ "BufEnter" }, { pattern = "*.md", command = ':MarkdownPreview' })
       --vim.api.nvim_create_autocmd({"BufDelete"}, {pattern = "*.md", command = ':MarkdownPreviewToggle'})
     end,
-    ft = {"markdown"}
+    ft = { "markdown" }
   }
 }
 
 require("lazy").setup(plugins, {
   root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
   defaults = {
-    lazy = true, -- should plugins be lazy-loaded?
+    lazy = true,                            -- should plugins be lazy-loaded?
     version = nil,
     -- version = "*", -- enable this to try installing the latest stable versions of plugins
   },
@@ -210,7 +223,7 @@ require("lazy").setup(plugins, {
     -- defaults for the `Lazy log` command
     -- log = { "-10" }, -- show the last 10 commits
     log = { "--since=3 days ago" }, -- show commits from the last 3 days
-    timeout = 120, -- kill processes that take more than 2 minutes
+    timeout = 120,                  -- kill processes that take more than 2 minutes
     url_format = "https://github.com/%s.git",
     -- lazy.nvim requires git >=2.19.0. If you really want to use lazy with an older version,
     -- then set the below to false. This is should work, but is NOT supported and will
@@ -221,7 +234,7 @@ require("lazy").setup(plugins, {
     -- directory where you store your local plugin projects
     path = "~/projects",
     ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
-    patterns = {}, -- For example {"folke"}
+    patterns = {},    -- For example {"folke"}
     fallback = false, -- Fallback to git when local plugin doesn't exist
   },
   install = {
@@ -268,14 +281,13 @@ require("lazy").setup(plugins, {
       -- To disable one of the defaults, set it to false
 
       -- open lazygit log
-      ["<leader>l"] = function(plugin)
+          ["<leader>l"] = function(plugin)
         require("lazy.util").float_term({ "lazygit", "log" }, {
           cwd = plugin.dir,
         })
       end,
-
       -- open a terminal for the plugin dir
-      ["<leader>t"] = function(plugin)
+          ["<leader>t"] = function(plugin)
         require("lazy.util").float_term(nil, {
           cwd = plugin.dir,
         })
@@ -295,7 +307,7 @@ require("lazy").setup(plugins, {
     -- automatically check for plugin updates
     enabled = false,
     concurrency = nil, ---@type number? set to 1 to check for updates very slowly
-    notify = true, -- get a notification when new updates are found
+    notify = true,    -- get a notification when new updates are found
     frequency = 3600, -- check for updates every hour
   },
   change_detection = {
@@ -309,9 +321,9 @@ require("lazy").setup(plugins, {
     },
     reset_packpath = true, -- reset the package path to improve startup time
     rtp = {
-      reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
+      reset = true,        -- reset the runtime path to $VIMRUNTIME and your config directory
       ---@type string[]
-      paths = {}, -- add any custom paths here that you want to includes in the rtp
+      paths = {},          -- add any custom paths here that you want to includes in the rtp
       ---@type string[] list any plugins you want to disable here
       disabled_plugins = {
         -- "gzip",

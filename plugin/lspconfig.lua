@@ -86,19 +86,19 @@ nvim_lsp.flow.setup {
 }
 
 if (Has "win32") then
-    nvim_lsp.tsserver.setup {
-        on_attach = on_attach,
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-        cmd = { "typescript-language-server.cmd", "--stdio" },
-        capabilities = capabilities
-    }
+  nvim_lsp.tsserver.setup {
+    on_attach = on_attach,
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+    cmd = { "typescript-language-server.cmd", "--stdio" },
+    capabilities = capabilities
+  }
 else
-    nvim_lsp.tsserver.setup {
-        on_attach = on_attach,
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-        cmd = { "typescript-language-server", "--stdio" },
-        capabilities = capabilities
-    }
+  nvim_lsp.tsserver.setup {
+    on_attach = on_attach,
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+    cmd = { "typescript-language-server", "--stdio" },
+    capabilities = capabilities
+  }
 end
 
 
@@ -110,11 +110,10 @@ nvim_lsp.lua_ls.setup {
   capabilities = capabilities,
   settings = {
     Lua = {
-         diagnostics = {
+      diagnostics = {
         -- Get the language server to recognize the `vim` global
         globals = { 'vim' },
       },
-
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file("", true),
@@ -139,7 +138,7 @@ nvim_lsp.tailwindcss.setup({
 nvim_lsp.rust_analyzer.setup({
   on_attach = on_attach,
   settings = {
-    ["rust-analyzer"] = {
+        ["rust-analyzer"] = {
       imports = {
         granularity = {
           group = "module",
@@ -215,26 +214,26 @@ nvim_lsp.intelephense.setup({
     environment = {
     },
     files = {
-      maxSize = 5000000;
+      maxSize = 5000000,
     }
   }
 })
 
-local servers = { "gopls", "astro", "pyright", "vuels", 'clangd', "svelte" }
+local servers = { "gopls", "astro", "pyright", "vuels", 'clangd', "svelte", "cmake" }
 for _, lsp in pairs(servers) do
-    nvim_lsp[lsp].setup  {
-        on_attach = on_attach,
-        capabilities = capabilities
-    }
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = true,
-  update_in_insert = false,
-  virtual_text = { spacing = 4, prefix = "●" },
-  severity_sort = true,
-})
+    underline = true,
+    update_in_insert = false,
+    virtual_text = { spacing = 4, prefix = "●" },
+    severity_sort = true,
+  })
 
 -- Show line diagnostics automatically in hover window
 vim.o.updatetime = 250
@@ -256,11 +255,11 @@ vim.diagnostic.config({
     source = "always", -- Or "if_many"
   },
 })
-function TableConcat(t1,t2)
-   for i=1,#t2 do
-      t1[#t1+1] = t2[i]
-   end
-   return t1
+function TableConcat(t1, t2)
+  for i = 1, #t2 do
+    t1[#t1 + 1] = t2[i]
+  end
+  return t1
 end
 
 local status, mason = pcall(require, "mason")
@@ -272,6 +271,6 @@ mason.setup({
 })
 
 lspconfig.setup {
-  ensure_installed = TableConcat(servers,{"lua_ls","tailwindcss","tsserver", "rust_analyzer", "intelephense"}),
+  ensure_installed = TableConcat(servers, { "lua_ls", "tailwindcss", "tsserver", "rust_analyzer", "intelephense" }),
   automatic_installation = true
 }
