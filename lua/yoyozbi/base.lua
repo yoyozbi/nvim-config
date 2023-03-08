@@ -2,7 +2,7 @@
 
 vim.scriptencoding = 'utf-8'
 
-local opt=vim.opt
+local opt = vim.opt
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
 
@@ -40,6 +40,15 @@ opt.wildoptions = 'pum'
 opt.pumblend = 5
 opt.background = 'dark'
 opt.guifont = "FiraCode Nerd Font Mono"
+--better completion experience
+-- menuone: popup even when there's only one match
+-- noinsert: Do not insert text until a selection is made
+-- noselect: Do not select, force to select one from the menu
+-- shortness: avoid showing extra messages when using completion
+-- updatetime: set updatetime for CursorHold
+vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
+vim.opt.shortmess = vim.opt.shortmess + { c = true }
+vim.api.nvim_set_option('updatetime', 300)
 
 --neovide
 if vim.g.neovide then
@@ -65,5 +74,5 @@ opt.formatoptions:append { 'r' }
 opt.clipboard:append { 'unnamedplus' }
 -- global function to check for windows (Has "win32")
 Has = function(x)
-    return vim.fn.has(x) == 1
+  return vim.fn.has(x) == 1
 end

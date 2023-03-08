@@ -237,7 +237,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 -- Show line diagnostics automatically in hover window
 vim.o.updatetime = 250
-vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+vim.cmd [[
+set signcolumn=yes
+autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})
+]]
 
 -- Diagnostic symbols in the sign column (gutter)
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -271,6 +274,7 @@ mason.setup({
 })
 
 lspconfig.setup {
-  ensure_installed = TableConcat(servers, { "lua_ls", "tailwindcss", "tsserver", "rust_analyzer", "intelephense" }),
+  ensure_installed = TableConcat(servers,
+    { "lua_ls", "tailwindcss", "tsserver", "rust_analyzer", "intelephense", "CodeLLDB" }),
   automatic_installation = true
 }

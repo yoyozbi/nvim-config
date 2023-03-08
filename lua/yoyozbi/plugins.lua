@@ -15,10 +15,22 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
 
   'neovim/nvim-lspconfig',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-nvim-lsp',
+
+  --completion framework:
   'hrsh7th/nvim-cmp',
-  'onsails/lspkind.nvim',
+  -- LSP completion source
+  'hrsh7th/cmp-nvim-lsp',
+
+  --useful completion sources
+  'hrsh7th/cmp-nvim-lua',
+  'hrsh7th/cmp-nvim-lsp-signature-help',
+  'hrsh7th/cmp-vsnip',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/vim-vsnip',
+  'hrsh7th/cmp-buffer',
+
+
   {
     'folke/lsp-colors.nvim',
     config = function()
@@ -34,6 +46,27 @@ local plugins = {
     'princejoogie/tailwind-highlight.nvim',
     lazy = false
   },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = { "lua", "rust", "toml" },
+        auto_install = true,
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        ident = { enable = true },
+        rainbow = {
+          enable = true,
+          extended_mode = true,
+          max_file_lines = nil,
+        }
+      }
+    end
+  },
   {
     'glepnir/lspsaga.nvim',
     config = function()
@@ -42,7 +75,6 @@ local plugins = {
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
       --Please make sure you install markdown and markdown_inline parser
-      { "nvim-treesitter/nvim-treesitter" }
     },
     keys = {
       { '<C-j>', '<Cmd>Lspsaga diagnostic_jump_next<CR>', desc = 'Jump to next diagnostic' },

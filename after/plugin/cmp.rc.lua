@@ -1,6 +1,5 @@
 local status, cmp = pcall(require, "cmp")
 if (not status) then return end
-local lspkind = require 'lspkind'
 local luasnip = require 'luasnip'
 
 local has_words_before = function()
@@ -16,19 +15,19 @@ cmp.setup({
     end,
   },
   mapping = {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true
     }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable() 
-      -- they way you will only jump inside the snippet region
+        -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+        -- they way you will only jump inside the snippet region
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
       elseif has_words_before() then
@@ -37,8 +36,7 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
-
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -48,12 +46,28 @@ cmp.setup({
       end
     end, { "i", "s" }),
   },
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-  }),
+  sources = {
+    { name = 'path' },
+    { name = 'nvim_lsp',               keyword_length = 3 },
+    { name = 'nvim_lsp_signature_help' },
+    { name = "nvim_lua",               keyword_length = 2 },
+    { name = 'buffer',                 keyword_length = 2 },
+    { name = 'vnsip',                  keyword_length = 2 },
+    { name = 'calc' }
+
+  },
   formatting = {
-    format = lspkind.cmp_format({ with_text = false, maxwidth = 50 })
+    fields = { 'menu', 'abbr', 'kind' },
+    format = function(entry, item)
+      local menu_icon = {
+        nvim_lsp = 'λ',
+        vsnip = '⋗',
+        buffer = 'Ω',
+        path = '🖫',
+      }
+      item.menu = menu_icon[entry.source.name]
+      return item
+    end,
   }
 })
 vim.cmd [[
