@@ -16,6 +16,7 @@ opt.backup = false
 opt.showcmd = true
 opt.cmdheight = 1
 opt.laststatus = 2
+opt.showtabline = 2
 opt.expandtab = true
 opt.scrolloff = 10
 --opt.shell = 'fish'

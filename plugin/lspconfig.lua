@@ -275,6 +275,6 @@ mason.setup({
 
 lspconfig.setup {
   ensure_installed = TableConcat(servers,
-    { "lua_ls", "tailwindcss", "tsserver", "rust_analyzer", "intelephense", "CodeLLDB" }),
+    { "lua_ls", "tailwindcss", "tsserver", "rust_analyzer", "intelephense" }),
   automatic_installation = true
 }
