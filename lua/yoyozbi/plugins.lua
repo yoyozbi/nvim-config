@@ -287,8 +287,8 @@ local plugins = {
     config = function()
       vim.g.mkdp_auto_start = 1
       vim.fn["mkdp#util#install"]()
-      vim.g.mkdp_filetypes = { "markdown" }
-      vim.api.nvim_create_autocmd({ "BufEnter" }, { pattern = "*.md", command = ':MarkdownPreview' })
+      --vim.g.mkdp_filetypes = { "markdown" }
+      --vim.api.nvim_create_autocmd({ "BufEnter" }, { pattern = "*.md", command = ':MarkdownPreview' })
       --vim.api.nvim_create_autocmd({"BufDelete"}, {pattern = "*.md", command = ':MarkdownPreviewToggle'})
     end,
     ft = { "markdown" }
@@ -368,13 +368,13 @@ require("lazy").setup(plugins, {
       -- To disable one of the defaults, set it to false
 
       -- open lazygit log
-          ["<leader>l"] = function(plugin)
+      ["<leader>l"] = function(plugin)
         require("lazy.util").float_term({ "lazygit", "log" }, {
           cwd = plugin.dir,
         })
       end,
       -- open a terminal for the plugin dir
-          ["<leader>t"] = function(plugin)
+      ["<leader>t"] = function(plugin)
         require("lazy.util").float_term(nil, {
           cwd = plugin.dir,
         })
