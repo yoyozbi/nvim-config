@@ -20,16 +20,10 @@ git clone https://github.com/yoyozbi/config $env:LOCALAPPDATA\nvim
 ```
 
 3. When you first enter `nvim`, all plugins will be installed automatically and you should be ready to go
-4. Install prettierd 
-
-all others lsps will be installed automatically however we will need to install prettierd for formatting in javascript
-
-```bash
-npm i -g @fsouza/prettierd
-```
+4. You are ready to go !
 
 ## Usage
 
 ### Keymaps
 
-You can use which-key to view your keys by pressing `\` for leader key commands or `:WhichKey` for the others
+You can use which-key to view your keys by pressing ` ` for leader key commands or `:WhichKey` for the others
