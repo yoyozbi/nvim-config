@@ -1,4 +1,6 @@
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<bs>', '<Nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<cr>', '<Nop>', { noremap = true, silent = true })
 vim.g.mapleader = " "
 vim.opt.encoding = "utf-8"
 vim.opt.nu = true
@@ -19,4 +21,5 @@ vim.cmd [[
 	set formatoptions-=cro
 	set colorcolumn=80
 	set clipboard^=unnamed,unnamedplus
+	set mouse=
 ]]

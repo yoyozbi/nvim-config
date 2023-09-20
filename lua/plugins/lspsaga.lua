@@ -4,6 +4,9 @@ return {
 		event = 'LspAttach',
 		config = function()
 			require('lspsaga').setup({})
+			require('nvim-treesitter.configs').setup({
+				ensure_installed = { "markdown", "markdown_inline" }
+			})
 		end,
 		dependencies = {
 			'nvim-treesitter/nvim-treesitter',

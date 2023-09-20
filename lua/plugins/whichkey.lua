@@ -82,7 +82,7 @@ return {
 				["/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment toggle linewise (visual)" },
 				l = {
 					name = "LSP",
-					a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', "Code Action" }
+					a = { '<cmd>LspSaga code_action<cr>', "Code Action" }
 				}
 			}
 			local opts = {
@@ -105,12 +105,19 @@ return {
 				l = {
 					name = "LSP",
 					i = { "<cmd>LspInfo<cr>", "Info" },
-					r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+					r = { "<cmd>Lspsaga rename<cr>", "Rename" },
 					s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
 					S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
 					o = { '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>',
 						'Show line diagnostic' },
 					a = { '<cmd>Lspsaga code_action<cr>', 'cursor action' }
+				},
+				-- diagnostics
+				d = {
+					name = "Diagnostics",
+					n = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Jump to next diagnostic" },
+					p = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Jump to previous diagnostic" },
+					d = { "<mcd>Lspsaga show_cursor_diagnostics<cr>", "Show cursor diagnostic" }
 				},
 
 				-- Telescope
@@ -142,6 +149,14 @@ return {
 			which_key.setup(setup)
 			which_key.register(mappings, opts)
 			which_key.register(vmappings, vopts)
+
+			which_key.register({
+				["K"] = { "<cmd>Lspsaga hover_doc<cr>", "Docs" },
+				["D"] = { "<cmd>Lspsaga peek_definition<cr>", "Peek definition" },
+				["T"] = { "<cmd>Lspsaga peek_type_definition<cr>", "Peek type" },
+				["E"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "View error" },
+				["gr"] = { "<cmd>Lspsaga goto_definition", "Goto definition" }
+			})
 		end
 	},
 }
