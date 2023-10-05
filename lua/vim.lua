@@ -13,6 +13,8 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.termguicolors = true
 vim.wo.signcolumn = 'yes'
+vim.g.suda_smart_edit = 1
+
 
 vim.cmd [[
 	set nohlsearch
