@@ -55,6 +55,10 @@ return {
 		opts = {
 
 		}
+	},
+	{
+		"lambdalisue/suda.vim",
+		lazy = false
 	}
 
 }
