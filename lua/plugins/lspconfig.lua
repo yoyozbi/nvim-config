@@ -27,7 +27,7 @@ return {
 		},
 		config = function()
 			local ensure_installed = { 'tsserver', 'rust_analyzer', 'html', 'emmet_ls', "clangd", 'lua_ls', 'dockerls',
-				'docker_compose_language_service', 'clangd', 'intelephense' }
+				'docker_compose_language_service', 'clangd', 'intelephense', 'gopls' }
 			-- Auto format
 			local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 			local lsp_format_on_save = function(bufnr)
