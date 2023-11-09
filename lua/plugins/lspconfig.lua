@@ -26,8 +26,10 @@ return {
 			{ 'zbirenbaum/copilot.lua' }
 		},
 		config = function()
-			local ensure_installed = { 'tsserver', 'rust_analyzer', 'html', 'emmet_ls', "clangd", 'lua_ls', 'dockerls',
+			local ensure_installed = { 'tsserver', 'html', 'emmet_ls', "clangd", 'lua_ls', 'dockerls',
 				'docker_compose_language_service', 'clangd', 'intelephense', 'gopls' }
+
+
 			-- Auto format
 			local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 			local lsp_format_on_save = function(bufnr)
@@ -58,34 +60,26 @@ return {
 			cmp.setup({
 				sources = {
 					{ name = 'copilot' },
-					{ name = 'nvim_lsp' }
+					{ name = 'nvim_lsp' },
+					{ name = 'nvim_lua' },
+					{ name = 'luasnip' }
 				},
-				mapping = {
+				formatting = lsp_zero.cmp_format(),
+				mapping = cmp.mapping.preset.insert({
 					['<Enter>'] = cmp.mapping.confirm({ select = false }),
 					['<C-e>'] = cmp.mapping.abort(),
 					['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
 					['<Tab>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
-					['<C-p>'] = cmp.mapping(function()
-						if cmp.visible() then
-							cmp.select_prev_item({ behavior = 'insert' })
-						else
-							cmp.complete()
-						end
-					end),
-					['<C-n>'] = cmp.mapping(function()
-						if cmp.visible() then
-							cmp.select_next_item({ behavior = 'insert' })
-						else
-							cmp.complete()
-						end
-					end),
-				},
+					['<C-Space>'] = cmp.mapping.complete(),
+				}),
 				snippet = {
 					expand = function(args)
 						require('luasnip').lsp_expand(args.body)
 					end,
 				},
 			})
+
+			require('luasnip.loaders.from_vscode').lazy_load()
 
 			require('mason').setup()
 			require('mason-lspconfig').setup({
@@ -99,8 +93,15 @@ return {
 				},
 			})
 
-			-- Nix
 			require'lspconfig'.nixd.setup{}
+			require'lspconfig'.rust_analyzer.setup{}
+			require'lspconfig'.yamlls.setup{
+				settings = {
+					yaml = {
+						keyOrdering = false,
+					}
+				}
+			}
 		end,
 	}
 }
