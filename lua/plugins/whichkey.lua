@@ -70,6 +70,7 @@ return {
 					v = { "j", "k" },
 				},
 			}
+	
 			local vopts = {
 				mode = 'v',
 				prefix = '<leader>',
@@ -85,6 +86,7 @@ return {
 					a = { '<cmd>LspSaga code_action<cr>', "Code Action" }
 				}
 			}
+
 			local opts = {
 				mode = 'n',
 				prefix = '<leader>',
