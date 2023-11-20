@@ -5,7 +5,7 @@ return {
 		config = function()
 			require('lspsaga').setup({})
 			require('nvim-treesitter.configs').setup({
-				ensure_installed = { "markdown", "markdown_inline" }
+				ensure_installed = { "markdown", "markdown_inline", "regex", "bash" }
 			})
 		end,
 		dependencies = {

@@ -1,24 +1,33 @@
 return {
 	-- Colorscheme
-	-- {
-	-- 	'folke/tokyonight.nvim',
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	opts = {},
-	-- 	config = function()
-	-- 		vim.cmd [[colorscheme tokyonight]]
-	-- 	end
-	-- },
 	{
-		"craftzdog/solarized-osaka.nvim",
-		lazy = true,
+		'folke/tokyonight.nvim',
+		lazy = false,
 		priority = 1000,
-		opts = function()
-			return {
-				transparent = true,
-			}
+		opts = {},
+		config = function()
+			-- vim.cmd [[colorscheme tokyonight]]
+		end
+	},
+	{
+		'sainnhe/sonokai',
+		lazy = false,
+		priority =1000,
+		opts = {},
+		config = function()
+			vim.cmd [[colorscheme sonokai]]
 		end,
 	},
+	-- {
+	-- 	"craftzdog/solarized-osaka.nvim",
+	-- 	lazy = true,
+	-- 	priority = 1000,
+	-- 	opts = function()
+	-- 		return {
+	-- 			transparent = true,
+	-- 		}
+	-- 	end,
+	-- },
 
 	-- File explorer
 	{

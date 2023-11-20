@@ -5,7 +5,7 @@ return {
 		lazy = false,
 		dependencies = {
 			-- LSP Support
-			{ 'neovim/nvim-lspconfig' },
+ 			{ 'neovim/nvim-lspconfig' },
 			{ 'williamboman/mason.nvim' },
 			{ 'williamboman/mason-lspconfig.nvim' },
 
@@ -26,7 +26,7 @@ return {
 			{ 'zbirenbaum/copilot.lua' }
 		},
 		config = function()
-			local ensure_installed = { 'tsserver', 'html', 'emmet_ls', "clangd", 'lua_ls', 'dockerls',
+			local ensure_installed = { 'tsserver', 'html', 'emmet_ls', "clangd", 'dockerls',
 				'docker_compose_language_service', 'clangd', 'intelephense', 'gopls' }
 
 
@@ -70,7 +70,7 @@ return {
 					['<C-e>'] = cmp.mapping.abort(),
 					['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
 					['<Tab>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
-					['<C-Space>'] = cmp.mapping.complete(),
+					['<C-S-Space>'] = cmp.mapping.complete(),
 				}),
 				snippet = {
 					expand = function(args)
@@ -93,7 +93,9 @@ return {
 				},
 			})
 
+			require'lspconfig'.tailwindcss.setup{}
 			require'lspconfig'.nixd.setup{}
+			require'lspconfig'.lua_ls.setup{}
 			require'lspconfig'.rust_analyzer.setup{}
 			require'lspconfig'.yamlls.setup{
 				settings = {

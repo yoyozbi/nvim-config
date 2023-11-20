@@ -128,6 +128,12 @@ return {
 				--   t = { "<cmd>Telescope live_grep <cr>", "Find Text Pattern" },
 				--   r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
 				-- },
+				t = {
+					name = "Toggleterm",
+					t = {"<cmd>ToggleTerm<cr>", "Toggle terminal"},
+					f = {"<cmd>ToggleTerm direction=float<cr>", "Toggle terminal float"},
+					g = {"<cmd>lua lazygit_toggle()<cr>", "Open lazygit"},
+				},
 
 				s = {
 					name = "Search",
