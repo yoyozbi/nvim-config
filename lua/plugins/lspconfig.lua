@@ -27,7 +27,8 @@ return {
 		},
 		config = function()
 			local ensure_installed = { 'tsserver', 'html', 'emmet_ls', "clangd", 'dockerls',
-				'docker_compose_language_service', 'clangd', 'intelephense', 'gopls' }
+				'docker_compose_language_service', 'clangd', 'intelephense', 'gopls',
+				'stylua', 'eslint', 'lua_ls' }
 
 
 			-- Auto format
@@ -59,10 +60,10 @@ return {
 
 			cmp.setup({
 				sources = {
-					{ name = 'copilot' },
-					{ name = 'nvim_lsp' },
-					{ name = 'nvim_lua' },
-					{ name = 'luasnip' }
+					{ name = 'copilot', group_index = 2 },
+					{ name = 'nvim_lsp', group_index = 2},
+					{ name = 'nvim_lua', group_index = 2 },
+					{ name = 'luasnip', group_index = 2 }
 				},
 				formatting = lsp_zero.cmp_format(),
 				mapping = cmp.mapping.preset.insert({
@@ -95,7 +96,6 @@ return {
 
 			require'lspconfig'.tailwindcss.setup{}
 			require'lspconfig'.nixd.setup{}
-			require'lspconfig'.lua_ls.setup{}
 			require'lspconfig'.rust_analyzer.setup{}
 			require'lspconfig'.yamlls.setup{
 				settings = {
