@@ -28,7 +28,7 @@ return {
 		config = function()
 			local ensure_installed = { 'tsserver', 'html', 'emmet_ls', "clangd", 'dockerls',
 				'docker_compose_language_service', 'clangd', 'intelephense', 'gopls',
-				'eslint', 'lua_ls' }
+				'eslint', 'lua_ls', 'svelte' }
 
 
 			-- Auto format
