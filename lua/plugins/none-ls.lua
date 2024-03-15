@@ -6,10 +6,13 @@ return {
 			null_ls.setup({
 				sources = {
 					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.diagnostics.eslint,
-					null_ls.builtins.code_actions.eslint_d,
+					require('none-ls.diagnostics.eslint'),
+					require('none-ls.code_actions.eslint_d'),
 					null_ls.builtins.completion.spell,
-					null_ls.builtins.diagnostics.ruff
+					require('none-ls.diagnostics.ruff'),
+					require('none-ls.formatting.eslint'),
+					require('none-ls.formatting.rustfmt'),
+					require('none-ls.formatting.ruff_format')
 				}
 			})
 		end,
