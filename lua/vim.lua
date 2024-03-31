@@ -9,11 +9,12 @@ vim.opt.encoding = "utf-8"
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
 vim.opt.autoread = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+-- vim.opt.tabstop = 2
+vim.opt.shiftwidth = 4
 vim.opt.termguicolors = true
 vim.wo.signcolumn = 'yes'
 vim.g.suda_smart_edit = 1
+vim.opt.smarttab = true
 
 
 vim.cmd [[
