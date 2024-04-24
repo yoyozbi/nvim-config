@@ -28,21 +28,21 @@ return {
 		config = function()
 			local ensure_installed = { 'tsserver', 'html', 'emmet_ls', "clangd", 'dockerls',
 				'docker_compose_language_service', 'clangd', 'intelephense', 'gopls',
-				'eslint', 'lua_ls', 'svelte', 'tailwindcss', 'nixd', 'rust_analyser', 'yamlls'  }
+				'eslint', 'lua_ls', 'svelte', 'tailwindcss', 'nixd', 'rust-analyser', 'yamlls'  }
 
 
 			-- Auto format
-			-- local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-			-- local lsp_format_on_save = function(bufnr)
-			-- 	vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-			-- 	vim.api.nvim_create_autocmd('BufWritePre', {
-			-- 		group = augroup,
-			-- 		buffer = bufnr,
-			-- 		callback = function()
-			-- 			vim.lsp.buf.format()
-			-- 		end,
-			-- 	})
-			-- end
+			local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+			local lsp_format_on_save = function(bufnr)
+				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+				vim.api.nvim_create_autocmd('BufWritePre', {
+					group = augroup,
+					buffer = bufnr,
+					callback = function()
+						vim.lsp.buf.format()
+					end,
+				})
+			end
 
 			-- Copilot
 			require('copilot').setup({
@@ -54,7 +54,7 @@ return {
 
 			lsp_zero.on_attach(function(client, bufnr)
 				lsp_zero.default_keymaps({ buffer = bufnr })
-				--lsp_format_on_save(bufnr)
+				lsp_format_on_save(bufnr)
 			end)
 			local cmp = require('cmp')
 
