@@ -28,7 +28,8 @@ return {
 		config = function()
 			local ensure_installed = { 'tsserver', 'html', 'emmet_ls', "clangd", 'dockerls',
 				'docker_compose_language_service', 'clangd', 'intelephense', 'gopls',
-				'eslint', 'lua_ls', 'svelte', 'tailwindcss', 'nixd', 'rust_analyser', 'yamlls'  }
+				'eslint', 'lua_ls', 'svelte', 'tailwindcss', 'nixd', 'rust_analyser', 'yamlls',
+				'nixd'}
 
 
 			-- Auto format
@@ -86,24 +87,28 @@ return {
 			require('mason-lspconfig').setup({
 				ensure_installed = ensure_installed,
 				handlers = {
-					lsp_zero.default_setup,
-					lua_ls = function()
-						local lua_opts = lsp_zero.nvim_lua_ls()
-						require('lspconfig').lua_ls.setup(lua_opts)
-					end,
+				    function(server_name)
+					require('lspconfig')[server_name].setup({})
+				    end,
+				    clangd = function()
+					require('lspconfig').clangd.setup({
+					    cmd = {
+						"clangd",
+						"--offset-encoding=utf-16",
+					    }
+					})
+				    end,
+				    yamlls = function()
+					require'lspconfig'.yamlls.setup{
+					    settings = {
+						    yaml = {
+							    keyOrdering = false,
+						    }
+						}
+					    }
+				    end,
 				},
 			})
-
-			require'lspconfig'.tailwindcss.setup{}
-			require'lspconfig'.nixd.setup{}
-			require'lspconfig'.rust_analyzer.setup{}
-			require'lspconfig'.yamlls.setup{
-				settings = {
-					yaml = {
-						keyOrdering = false,
-					}
-				}
-			}
 		end,
 	}
 }

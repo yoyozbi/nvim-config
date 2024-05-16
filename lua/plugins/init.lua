@@ -78,7 +78,12 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 
-		}
+		},
+		config = function()
+		    if not vim.g.vscode then
+			require('trouble').setup({})
+		    end
+		end
 	},
 	{
 		"lambdalisue/suda.vim",
