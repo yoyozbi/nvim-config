@@ -41,9 +41,8 @@ return {
 				"svelte",
 				"tailwindcss",
 				"nixd",
-				"rust-analyser",
+				"rust_analyser",
 				"yamlls",
-				"nixd",
 			}
 
 			-- Auto format
@@ -123,6 +122,8 @@ return {
 					end,
 				},
 			})
+
+			require("lspconfig").nixd.setup({}) -- Mason does not have nixd
 		end,
 	},
 }
