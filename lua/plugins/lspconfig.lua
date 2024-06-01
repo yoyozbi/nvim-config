@@ -41,7 +41,7 @@ return {
 				"svelte",
 				"tailwindcss",
 				"nixd",
-				"rust_analyser",
+				"rust_analyzer",
 				"yamlls",
 			}
 
@@ -96,9 +96,37 @@ return {
 
 			require("luasnip.loaders.from_vscode").lazy_load()
 
+			-- Dont install lsps on Nixos they will need to be installed manually
+			if string.find(vim.loop.os_uname().version, "NixOS") ~= nil then
+				vim.notify("NixOS detected, not automatically installing LSPs", "warn")
+				local to_setup = ensure_installed
+				ensure_installed = {}
+				for _, server_name in ipairs(to_setup) do
+					if server_name == "clangd" then
+						require("lspconfig").clangd.setup({
+							cmd = {
+								"clangd",
+								"--offset-encoding=utf-16",
+							},
+						})
+					elseif server_name == "yamlls" then
+						require("lspconfig").yamlls.setup({
+							settings = {
+								yaml = {
+									keyOrdering = false,
+								},
+							},
+						})
+					else
+						require("lspconfig")[server_name].setup({})
+					end
+				end
+			end
+
 			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = ensure_installed,
+				automatic_installation = false,
 				handlers = {
 					function(server_name)
 						require("lspconfig")[server_name].setup({})
