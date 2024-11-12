@@ -1,4 +1,5 @@
 # My personal NeoVim config
+My personnal neovim config based on [LazyVim](https://github.com/LazyVim/LazyVim) starter template
 
 ## Setup
 
@@ -27,3 +28,4 @@ git clone https://github.com/yoyozbi/config $env:LOCALAPPDATA\nvim
 ### Keymaps
 
 You can use which-key to view your keys by pressing ` ` for leader key commands or `:WhichKey` for the others
+
