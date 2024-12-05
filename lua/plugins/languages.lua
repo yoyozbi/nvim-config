@@ -8,6 +8,17 @@ return {
   { import = "lazyvim.plugins.extras.lang.astro" },
   { import = "lazyvim.plugins.extras.lang.tailwind" },
   { import = "lazyvim.plugins.extras.lang.prisma" },
+  -- Deno
+  {
+    "neovim/nvim-lspconfig",
+    ---@class PluginLspOpts
+    opts = {
+      ---@type lspconfig.options
+      servers = {
+        denols = {},
+      },
+    },
+  },
   -- Other programing language
   { import = "lazyvim.plugins.extras.lang.php" },
   { import = "lazyvim.plugins.extras.lang.go" },
