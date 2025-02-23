@@ -8,6 +8,23 @@ return {
   { import = "lazyvim.plugins.extras.lang.astro" },
   { import = "lazyvim.plugins.extras.lang.tailwind" },
   { import = "lazyvim.plugins.extras.lang.prisma" },
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "tinymist",
+      },
+    },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "typst",
+      },
+    },
+  },
+
   -- Deno
   {
     "neovim/nvim-lspconfig",
@@ -16,9 +33,23 @@ return {
       ---@type lspconfig.options
       servers = {
         denols = {},
+        tinymist = {
+          settings = {
+            formatterMode = "typstyle",
+            exportPdf = "never",
+            semanticTokens = "disable",
+          },
+        },
       },
     },
   },
+  {
+    "chomosuke/typst-preview.nvim",
+    lazy = false, -- or ft = 'typst'
+    version = "1.*",
+    opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+  },
+
   -- Other programing language
   { import = "lazyvim.plugins.extras.lang.php" },
   { import = "lazyvim.plugins.extras.lang.go" },
